@@ -1,0 +1,31 @@
+// src/i18n/en.json
+{
+  "welcome": "Welcome to Rural e-Governance",
+  "fileComplaint": {
+    "title": "File a Complaint",
+    "titleLabel": "Complaint Title",
+    "description": "Description",
+    "category": "Category",
+    "priority": "Priority",
+    "takePhoto": "Take Photo",
+    "retakePhoto": "Retake Photo",
+    "getLocation": "Get Location",
+    "photoTaken": "Photo taken",
+    "submit": "Submit Complaint"
+  },
+  "schemes": {
+    "title": "Government Schemes",
+    "checkEligibility": "Check Eligibility",
+    "availableSchemes": "Available Schemes"
+  },
+  "learning": {
+    "title": "Learning Resources",
+    "download": "Download for Offline",
+    "play": "Play Video"
+  },
+  "jobs": {
+    "title": "Job Portal",
+    "search": "Search Jobs",
+    "apply": "Apply Now"
+  }
+}

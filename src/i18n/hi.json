@@ -1,0 +1,16 @@
+// src/i18n/hi.json
+{
+  "welcome": "ग्रामीण ई-गवर्नेंस में आपका स्वागत है",
+  "fileComplaint": {
+    "title": "शिकायत दर्ज करें",
+    "titleLabel": "शिकायत का शीर्षक",
+    "description": "विवरण",
+    "category": "श्रेणी",
+    "priority": "प्राथमिकता",
+    "takePhoto": "फोटो लें",
+    "retakePhoto": "फिर से फोटो लें",
+    "getLocation": "स्थान प्राप्त करें",
+    "photoTaken": "फोटो ली गई",
+    "submit": "शिकायत जमा करें"
+  }
+}
