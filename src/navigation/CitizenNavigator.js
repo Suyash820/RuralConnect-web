@@ -20,7 +20,7 @@ import JobDetail from '../screens/citizen/JobDetail';
 import Profile from '../screens/citizen/Profile';
 import Settings from '../screens/citizen/Settings';
 import ComplaintDetail from '../screens/citizen/ComplaintDetail';
-import TrackComplaint from '../screens/citizen/TrackComplaint';
+import TrackComplaint from '../screens/citizen/MyComplaints';
 import Chatbot from '../screens/citizen/Chatbot';
 import OfflineContent from '../screens/citizen/OfflineContent';
 

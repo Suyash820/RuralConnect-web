@@ -756,12 +756,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: '#f0f0f0',
   },
-  userMessage .chatBubble: {
-    backgroundColor: '#2196F3',
-  },
-  userMessage .chatText: {
-    color: 'white',
-  },
+  // Fix the problematic styles
+'userMessage.chatBubble': {
+  backgroundColor: '#2196F3',
+},
+'userMessage.chatText': {
+  color: 'white',
+},
   chatText: {
     fontSize: 14,
     lineHeight: 20,
