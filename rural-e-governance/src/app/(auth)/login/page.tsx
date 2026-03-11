@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff, Fingerprint, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
+import api from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
 
 // ─── Inline SVG Art Components ──────────────────────────────────────────────
 
@@ -114,6 +116,9 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [activeTab, setActiveTab] = useState(role);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const { login } = useAuth();
 
   const roles = {
     citizen: { hindi: 'नागरिक', english: 'Citizen', color: '#E65100', light: '#FFF3E0' },
@@ -121,9 +126,38 @@ export default function LoginPage() {
     admin:   { hindi: 'प्रशासक', english: 'Admin',   color: '#4A148C', light: '#F3E5F5' },
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/${activeTab}/dashboard`);
+    setErrorMsg('');
+    setLoading(true);
+
+    try {
+      const res = await api.post('/auth/login', {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (res.data.success) {
+        // Double-check role matches the tab
+        if (res.data.data.role !== activeTab) {
+           setErrorMsg(`You are registered as a ${res.data.data.role}, not ${activeTab}.`);
+           setLoading(false);
+           return;
+        }
+
+        login(res.data.token, res.data.data);
+        router.push(`/${activeTab}/dashboard`);
+      }
+    } catch (error: any) {
+      console.error('Login error', error);
+      if (error.response && error.response.data && error.response.data.message) {
+         setErrorMsg(error.response.data.message);
+      } else {
+         setErrorMsg('An error occurred during login. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -433,6 +467,17 @@ export default function LoginPage() {
           color: var(--gold);
           letter-spacing: 0.2em;
           margin-top: 0.25rem;
+        }
+
+        .error-message {
+          background-color: #fee2e2;
+          color: #b91c1c;
+          padding: 8px 12px;
+          border-radius: 4px;
+          font-size: 0.85rem;
+          margin-bottom: 1rem;
+          text-align: center;
+          border-left: 3px solid #b91c1c;
         }
 
         /* Role Tabs */
@@ -900,6 +945,7 @@ export default function LoginPage() {
 
                 {/* Form */}
                 <form onSubmit={handleSubmit}>
+                  {errorMsg && <div className="error-message">{errorMsg}</div>}
                   <div className="field-group">
                     <div className="field-label">
                       <span className="label-hindi">ईमेल पता</span>
@@ -942,10 +988,10 @@ export default function LoginPage() {
                     </Link>
                   </div>
 
-                  <button type="submit" className="submit-btn">
+                  <button type="submit" className="submit-btn" disabled={loading}>
                     <span className="submit-btn-text">
                       <span className="btn-ornament">◈</span>
-                      प्रवेश करें · Sign In
+                      {loading ? 'प्रवेश कर रहा है...' : 'प्रवेश करें · Sign In'}
                       <span className="btn-ornament">◈</span>
                     </span>
                   </button>

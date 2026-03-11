@@ -59,11 +59,11 @@ export default function CitizenHeader() {
   ];
 
   const user = {
-    name: 'Rajesh Kumar',
+    name: 'Aditya Singh',
     role: 'Citizen',
     id: 'CG20240123456',
-    email: 'rajesh.kumar@example.com',
-    avatar: 'RK',
+    email: 'aditya@gmail.com',
+    avatar: 'AS',
     notifications: 3,
     verified: true
   };

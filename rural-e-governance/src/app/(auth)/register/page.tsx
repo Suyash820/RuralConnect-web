@@ -15,6 +15,8 @@ import {
   AlertCircle
 } from 'lucide-react';
 import Link from 'next/link';
+import api from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -37,38 +39,61 @@ export default function RegisterPage() {
     aadhaar: '',
     role: role
   });
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const { login } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg('');
     
     if (step === 1) {
       // Validate basic info
       if (!formData.fullName || !formData.email || !formData.phone || !formData.password) {
-        alert('Please fill all required fields');
+        setErrorMsg('Please fill all required fields');
         return;
       }
       
       if (formData.password !== formData.confirmPassword) {
-        alert('Passwords do not match');
+        setErrorMsg('Passwords do not match');
         return;
       }
       
       setStep(2);
     } else {
       // Complete registration
-      console.log('Registration data:', formData);
-      
-      // Redirect to respective dashboard
-      switch(role) {
-        case 'citizen':
-          router.push('/citizen/dashboard');
-          break;
-        case 'officer':
-          router.push('/officer/dashboard');
-          break;
-        case 'admin':
-          router.push('/admin/dashboard');
-          break;
+      setLoading(true);
+      try {
+        const payload = { ...formData };
+        if (role === 'admin') payload.role = 'admin'; // handled by backend or separate flow, but for now
+        
+        const res = await api.post('/auth/register', payload);
+
+        if (res.data.success) {
+          if (role === 'citizen') {
+            // Citizens login immediately
+            login(res.data.token, res.data.data);
+            router.push('/citizen/dashboard');
+          } else if (role === 'officer') {
+            // Officers are pending
+            setStep(3);
+            setSuccessMsg(res.data.message);
+          } else {
+            setStep(3);
+          }
+        }
+      } catch (error: any) {
+        console.error('Registration error', error);
+        if (error.response && error.response.data && error.response.data.message) {
+           setErrorMsg(error.response.data.message);
+        } else if (error.response && error.response.data && error.response.data.errors) {
+           setErrorMsg(error.response.data.errors[0].msg);
+        } else {
+           setErrorMsg('An error occurred during registration. Please try again.');
+        }
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -124,6 +149,15 @@ export default function RegisterPage() {
               : 'Complete verification'}
         </p>
       </div>
+
+      {errorMsg && (
+        <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700">
+          <p className="flex items-center text-sm font-medium">
+             <AlertCircle className="w-5 h-5 mr-2" />
+             {errorMsg}
+          </p>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {step === 1 ? (
@@ -324,7 +358,7 @@ export default function RegisterPage() {
                   </p>
                 </div>
                 <p className="text-sm text-gray-500">
-                  You will be notified via email once your account is verified.
+                  {successMsg || 'You will be notified via email once your account is verified.'}
                 </p>
               </div>
             )}
@@ -332,19 +366,32 @@ export default function RegisterPage() {
         )}
 
         <div className="flex space-x-4">
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex-1 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors"
-          >
-            Back
-          </button>
-          <button
-            type="submit"
-            className="flex-1 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            {step === 1 ? 'Continue' : 'Complete Registration'}
-          </button>
+          {step < 3 && (
+            <button
+              type="button"
+              onClick={handleBack}
+              className="flex-1 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+            >
+              Back
+            </button>
+          )}
+          {step < 3 ? (
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex-1 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-300"
+            >
+              {loading ? 'Processing...' : step === 1 ? 'Continue' : 'Complete Registration'}
+            </button>
+          ) : (
+             <button
+              type="button"
+              onClick={() => router.push(`/login?role=${role}`)}
+              className="flex-1 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Return to Login
+            </button>
+          )}
         </div>
 
         <div className="text-center">
