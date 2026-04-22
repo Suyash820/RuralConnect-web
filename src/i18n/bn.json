@@ -1,0 +1,49 @@
+{
+  "welcome": "গ্রামীণ ই-গভর্নেন্সে স্বাগতম",
+  "fileComplaint": {
+    "title": "অভিযোগ দায়ের করুন",
+    "titleLabel": "অভিযোগের শিরোনাম",
+    "description": "বিবরণ",
+    "category": "বিভাগ",
+    "priority": "অগ্রাধিকার",
+    "takePhoto": "ছবি তোলো",
+    "retakePhoto": "আবার ছবি তোলো",
+    "getLocation": "অবস্থান পান",
+    "photoTaken": "ছবি তোলা হয়েছে",
+    "submit": "অভিযোগ জমা দিন"
+  },
+  "dashboard": {
+    "welcome": "স্বাগতম",
+    "quickActions": "দ্রুত কর্ম",
+    "fileComplaint": "অভিযোগ দায়ের",
+    "checkSchemes": "স্কিম চেক করুন",
+    "learning": "শেখা",
+    "jobs": "চাকরি",
+    "aiAssistant": "AI সহকারী",
+    "profile": "প্রোফাইল",
+    "recentActivity": "সাম্প্রতিক কার্যকলাপ",
+    "viewAll": "সব দেখ"
+  },
+  "profile": {
+    "logoutTitle": "লগআউট",
+    "logoutMessage": "আপনি কি নিশ্চিত যে আপনি লগআউট করতে চান?",
+    "cancel": "বাতিল",
+    "logout": "লগআউট",
+    "personalInfo": "ব্যক্তিগত তথ্য",
+    "myComplaints": "আমার অভিযোগ",
+    "savedSchemes": "সংরক্ষিত স্কিম",
+    "downloadedContent": "ডাউনলোড করা কন্টেন্ট",
+    "changeLanguage": "ভাষা পরিবর্তন করুন",
+    "settings": "সেটিংস",
+    "helpSupport": "সাহায্য ও সহায়তা",
+    "aboutApp": "অ্যাপ সম্পর্কে",
+    "selectLanguage": "ভাষা নির্বাচন করুন",
+    "notifications": "বিজ্ঞপ্তি",
+    "offlineMode": "অফলাইন মোড",
+    "language": "ভাষা",
+    "complaints": "অভিযোগ",
+    "resolved": "সমাধান করা হয়েছে",
+    "schemes": "স্কিম",
+    "editProfile": "প্রোফাইল সম্পাদনা করুন"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "welcome": "గ్రామీణ ఈ-గవర్నెన్స్‌కు స్వాగతం",
+  "fileComplaint": {
+    "title": "ఫిర్యాదు దాఖలు చేయండి",
+    "titleLabel": "ఫిర్యాదు శీర్షిక",
+    "description": "వివరణ",
+    "category": "వర్గం",
+    "priority": "ప్రాధాన్యత",
+    "takePhoto": "ఫోటో తీయండి",
+    "retakePhoto": "మళ్ళీ ఫోటో తీయండి",
+    "getLocation": "స్థానం పొందండి",
+    "photoTaken": "ఫోటో తీయబడింది",
+    "submit": "ఫిర్యాదు సమర్పించండి"
+  },
+  "dashboard": {
+    "welcome": "స్వాగతం",
+    "quickActions": "త్వరిత చర్యలు",
+    "fileComplaint": "ఫిర్యాదు దాఖలు",
+    "checkSchemes": "పథకాలు తనిఖీ చేయండి",
+    "learning": "నేర్చుకోవడం",
+    "jobs": "ఉద్యోగాలు",
+    "aiAssistant": "AI సహాయకుడు",
+    "profile": "ప్రొఫైల్",
+    "recentActivity": "ఇటీవలి కార్యకలాపాలు",
+    "viewAll": "అన్ని చూడండి"
+  },
+  "profile": {
+    "logoutTitle": "లాగౌట్",
+    "logoutMessage": "మీరు నిజంగానే లాగౌట్ అవ్వాలనుకుంటున్నారా?",
+    "cancel": "రద్దు చేయండి",
+    "logout": "లాగౌట్",
+    "personalInfo": "వ్యక్తిగత సమాచారం",
+    "myComplaints": "నా ఫిర్యాదులు",
+    "savedSchemes": "సేవ్ చేసిన పథకాలు",
+    "downloadedContent": "డౌన్‌లోడ్ చేసిన కంటెంట్",
+    "changeLanguage": "భాష మార్చండి",
+    "settings": "సెట్టింగులు",
+    "helpSupport": "సహాయం & మద్దతు",
+    "aboutApp": "యాప్ గురించి",
+    "selectLanguage": "భాషను ఎంచుకోండి",
+    "notifications": "నోటిఫికేషన్లు",
+    "offlineMode": "ఆఫ్‌లైన్ మోడ్",
+    "language": "భాష",
+    "complaints": "ఫిర్యాదులు",
+    "resolved": "పరిష్కరించబడింది",
+    "schemes": "పథకాలు",
+    "editProfile": "ప్రొఫైల్ సవరించండి"
+  }
+}
